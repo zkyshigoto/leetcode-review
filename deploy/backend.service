@@ -1,0 +1,14 @@
+[Unit]
+Description=LeetCode Review Backend service
+After=network.target
+
+[Service]
+# Adjust User/Group if needed, e.g., www-data
+User=root
+WorkingDirectory=/opt/leetcode-review/backend
+Environment="PATH=/opt/leetcode-review/backend/venv/bin"
+ExecStart=/opt/leetcode-review/backend/venv/bin/uvicorn main:app --host 127.0.0.1 --port 8000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

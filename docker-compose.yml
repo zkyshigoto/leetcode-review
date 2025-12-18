@@ -1,0 +1,13 @@
+services:
+  leetcode-review:
+    build: .
+    image: leetcode-review:latest
+    container_name: leetcode-review
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      # Persist the database
+      - ./data:/app/backend/data
+      # Optional: Override nginx config if needed
+      # - ./deploy/leetcode-review.nginx:/etc/nginx/sites-available/default

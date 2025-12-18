@@ -1,0 +1,31 @@
+server {
+    listen 80;
+    server_name weien.sigma.edu.kg;
+
+    # Frontend (Static Files)
+    location / {
+        root /opt/leetcode-review/frontend/dist;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
+
+    # Backend API Proxies
+    location /problems {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /fetch {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /check {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_read_timeout 300; # Allow long timeouts for LLM generation
+    }
+}
